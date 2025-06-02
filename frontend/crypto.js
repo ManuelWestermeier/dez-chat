@@ -17,3 +17,8 @@ export async function signChallenge(privateKey, challenge) {
   const signature = await window.crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, privateKey, data);
   return Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
+
+export async function signPocket(privateKey, dataHashBuffer) {
+  const sign = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", privateKey, dataHashBuffer);
+  return Buffer.from(sign).toString('hex');
+}
