@@ -1,0 +1,12 @@
+{
+  "name": "mesh-chat-server",
+  "version": "1.0.0",
+  "main": "meshServer.js",
+  "scripts": {
+    "start": "node meshServer.js"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0",
+    "ws": "^8.0.0"
+  }
+}
