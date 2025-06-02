@@ -70,6 +70,7 @@ wss.on('connection', (ws) => {
       seenPockets.add(pocket.id);
       setTimeout(() => seenPockets.delete(pocket.id), 5 * 60 * 1000);
 
+      // Route to local clients
       for (const receiverPK of pocket.receiverPKs || []) {
         const client = clients.get(receiverPK);
         if (client?.readyState === WebSocket.OPEN) {
@@ -77,6 +78,7 @@ wss.on('connection', (ws) => {
         }
       }
 
+      // Forward to all peers
       for (const peer of peers) {
         if (peer.readyState === WebSocket.OPEN) {
           peer.send(JSON.stringify({ type: 'pocket', pocket }));
